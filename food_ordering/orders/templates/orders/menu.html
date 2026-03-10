@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url("{% static 'orders/images/bg.jpeg' %}") no-repeat center center fixed;
+        background-size:cover;
+        }
+        header {
+            background-color: #333333;
+            color:white;
+            padding: 1rem;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        .name{
+            color: #007BFF;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            padding: 20px;
+            max-width: 500px;
+            margin: 20px auto;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .food-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+        }
+        .food-item:last-child {
+            border-bottom: none;
+        }
+        .food-name {
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .food-description {
+            color: #777;
+        }
+        .price {
+            font-weight: bold;
+            color: #007BFF;
+        }
+        .add-to-cart {
+            text-decoration: none;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: #fff;
+            border-radius: 5px;
+        }
+        .add-to-cart:hover {
+            background-color: #218838;
+        }
+        header {
+        background-color: #333;
+        color: #fff;
+        padding: 1rem 0;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    h1 {
+        margin: 0;
+        font-size: 2rem;
+        color: #f5f0f0;
+    }
+    nav {
+        margin-top: 10px;
+    }
+    nav a {
+        text-decoration: none;
+        color: #fff;
+        margin: 0 10px;
+        padding: 5px 15px;
+        background-color: #007BFF;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+    nav a:hover {
+        background-color: #0056b3;
+    }
+    @media (min-width: 768px) {
+        .navbar {
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        h1 {
+            margin-left: 10px;
+        }
+    }
+    .food-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        img{
+            height:80px;
+            width:80px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1><img src="{% static 'orders/images/logo.jpeg' %}">UP Food and Restaurant</h1>
+            <nav>
+                <a href="/">Menu</a>
+                <a href="/cart/">View Cart</a>
+                <a href="/place_order/">Place Order</a>
+                <a href="/admin/">Admin</a>
+            </nav>
+        </div>
+    </header>
+        <h1 class="name">Menu</h1>
+    <div class="container">
+        {% for food_item in food_items %}
+        <div class="food-item">
+            <img class="food-image" src="{{ food_item.image.url }}" alt="{{ food_item.name }}">
+            <div class="food-name">{{ food_item.name }}</div>
+            <p class="food-description">{{ food_item.description }}</p>
+            <p class="price">Rs.{{ food_item.price }}</p>
+            <a class="add-to-cart" href="/add_to_cart/{{ food_item.id }}/">Add to Cart</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

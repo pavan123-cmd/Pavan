@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <style>
+        body {
+            background: url("{% static 'orders/images/bg.jpeg' %}") no-repeat center center fixed;
+            background-size:cover;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            padding: 20px;
+            max-width: 900px;
+            margin: 20px auto;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        .total {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #007BFF;
+        }
+        .place-order {
+            display: block;
+            margin: 20px 0;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .place-order:hover {
+            background-color: #0056b3;
+        }
+        header {
+        background-color: #333;
+        color: #fff;
+        padding: 1rem 0;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    h1 {
+        margin: 0;
+        font-size: 2rem;
+    }
+    nav {
+        margin-top: 10px;
+    }
+    nav a {
+        text-decoration: none;
+        color: #fff;
+        margin: 0 10px;
+        padding: 5px 15px;
+        background-color: #007BFF;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+    nav a:hover {
+        background-color: #0056b3;
+    }
+    @media (min-width: 768px) {
+        .navbar {
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+       
+    }
+    h1 {
+            margin-left: 10px;
+            color: #ddd;
+        }
+    img{
+height:80px;
+width:80px;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1><img src="{% static 'orders/images/logo.jpeg' %}">UN Food and Restaurant</h1>
+            <nav>
+                <a href="/">Menu</a>
+                <a href="/cart/">View Cart</a>
+                <a href="/place_order/">Place Order</a>
+                <a href="/admin/">Admin</a>
+            </nav>
+        </div>
+    </header>
+   
+        <h1>Your Cart</h1>
+    <div class="container">
+        {% for item in cart_items %}
+        <div class="cart-item">
+            <div>{{ item.item.name }}</div>
+            <div>Rs.{{ item.item.price }} x {{ item.quantity }}</div>
+        </div>
+        {% endfor %}
+        <div class="total">Total: Rs.{{ total_price }}</div>
+        <a href="/place_order/" class="place-order">Place Order</a>
+    </div>
+</body>
+</html>
